@@ -1,0 +1,104 @@
+name: Codex Automata Quality Gates
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+jobs:
+  spec-check:
+    name: Spec-before-code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify specs exist for modules
+        run: |
+          chmod +x scripts/spec-check.sh
+          ./scripts/spec-check.sh --src-dir src --spec-dir docs
+
+  divergence-gate:
+    name: Divergence gate
+    runs-on: ubuntu-latest
+    if: hashFiles('src/**') != '' || hashFiles('app/**') != '' || hashFiles('lib/**') != ''
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan for slop fingerprints
+        run: |
+          chmod +x scripts/divergence-gate.sh
+          if [ -f "divergence.json" ]; then
+            ./scripts/divergence-gate.sh --config divergence.json
+          else
+            ./scripts/divergence-gate.sh
+          fi
+
+  commit-lint:
+    name: Commit traceability
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Lint commit messages
+        run: |
+          chmod +x scripts/commit-lint.sh
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+          failed=0
+          for sha in $(git log --format=%H "$base".."$head"); do
+            msg=$(git log -1 --format=%B "$sha")
+            if ! echo "$msg" | ./scripts/commit-lint.sh --stdin; then
+              echo "Commit $sha failed lint."
+              failed=1
+            fi
+          done
+          if [ "$failed" -eq 1 ]; then
+            exit 1
+          fi
+
+  tests:
+    name: Test suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect and run tests
+        run: |
+          if [ -f "package.json" ]; then
+            npm ci
+            npm test
+          elif [ -f "requirements.txt" ] || [ -f "pyproject.toml" ]; then
+            pip install -r requirements.txt 2>/dev/null || pip install -e . 2>/dev/null || true
+            python -m pytest tests/ 2>/dev/null || python -m unittest discover tests/ 2>/dev/null || echo "No Python test runner found."
+          elif [ -f "go.mod" ]; then
+            go test ./...
+          elif [ -f "Cargo.toml" ]; then
+            cargo test
+          else
+            echo "No recognized project type. Skipping test run."
+          fi
+
+  spec-check-windows:
+    name: Spec-before-code (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify specs exist for modules
+        shell: pwsh
+        run: |
+          & scripts/spec-check.ps1 -SrcDir src -SpecDir docs
+
+  divergence-gate-windows:
+    name: Divergence gate (Windows)
+    runs-on: windows-latest
+    if: hashFiles('src/**') != '' || hashFiles('app/**') != '' || hashFiles('lib/**') != ''
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan for slop fingerprints
+        shell: pwsh
+        run: |
+          if (Test-Path 'divergence.json') {
+            & scripts/divergence-gate.ps1 -Config divergence.json
+          } else {
+            & scripts/divergence-gate.ps1
+          }

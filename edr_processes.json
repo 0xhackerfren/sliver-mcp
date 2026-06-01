@@ -1,0 +1,76 @@
+{
+  "edr_signatures": {
+    "CrowdStrike Falcon": [
+      "CSFalconService.exe", "CSFalconContainer.exe", "csagent.exe",
+      "falcond.exe", "falcon-sensor", "csfalconservice"
+    ],
+    "SentinelOne": [
+      "SentinelAgent.exe", "SentinelServiceHost.exe", "SentinelStaticEngine.exe",
+      "sentinelone-agent", "SentinelHelperService.exe", "SentinelStaticEngineScanner.exe"
+    ],
+    "Carbon Black": [
+      "cb.exe", "CbDefense.exe", "CbOsR.exe", "RepMgr.exe",
+      "cbcomms.exe", "cbstream.exe", "cbdaemon"
+    ],
+    "Microsoft Defender ATP": [
+      "MsSense.exe", "SenseIR.exe", "SenseCncProxy.exe", "SenseNdr.exe",
+      "MsMpEng.exe", "MpCmdRun.exe"
+    ],
+    "Windows Defender": [
+      "MsMpEng.exe", "MpCmdRun.exe", "NisSrv.exe", "SecurityHealthService.exe"
+    ],
+    "Cortex XDR": [
+      "cyserver.exe", "CyveraService.exe", "CyvrFsFlt.exe",
+      "cortex-xdr", "traps_agent"
+    ],
+    "Elastic EDR": [
+      "elastic-agent.exe", "elastic-endpoint.exe", "winlogbeat.exe",
+      "elastic-agent", "elastic-endpoint"
+    ],
+    "Cylance": [
+      "CylanceSvc.exe", "CylanceUI.exe", "CylanceProtectSetup.exe"
+    ],
+    "ESET": [
+      "ekrn.exe", "egui.exe", "eset_nod32_antivirus.exe", "ERAAgent.exe"
+    ],
+    "Sophos": [
+      "SavService.exe", "SAVAdminService.exe", "SophosHealth.exe",
+      "SophosFS.exe", "SSPService.exe", "hmpalert.exe"
+    ],
+    "Kaspersky": [
+      "avp.exe", "avpui.exe", "klnagent.exe", "kavfs.exe"
+    ],
+    "Symantec / Broadcom": [
+      "ccSvcHst.exe", "rtvscan.exe", "SMC.exe", "sepWscSvc64.exe",
+      "SepMasterService.exe"
+    ],
+    "Trend Micro": [
+      "coreServiceShell.exe", "ds_agent.exe", "Ntrtscan.exe",
+      "PccNTMon.exe", "TMBMSRV.exe"
+    ],
+    "FireEye / Trellix": [
+      "xagt.exe", "FireSvc.exe", "HXService.exe", "MfeEpeHost.exe"
+    ],
+    "Wazuh": [
+      "wazuh-agent.exe", "ossec-agent.exe", "wazuh-agentd"
+    ],
+    "Velociraptor": [
+      "velociraptor.exe", "velociraptor"
+    ],
+    "Sysmon": [
+      "Sysmon.exe", "Sysmon64.exe", "sysmon"
+    ]
+  },
+  "high_risk_tools": [
+    "sliver_execute_assembly",
+    "sliver_execute_shellcode",
+    "sliver_sideload",
+    "sliver_get_system",
+    "sliver_process_dump",
+    "sliver_migrate",
+    "sliver_make_token",
+    "sliver_registry_write",
+    "sliver_registry_create_key",
+    "sliver_start_service"
+  ]
+}

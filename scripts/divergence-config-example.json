@@ -1,0 +1,55 @@
+{
+  "description": "Example divergence gate configuration. Copy this file and customize the fingerprints list based on your design identity document's banned patterns.",
+  "fingerprints": [
+    {
+      "label": "banned-font:Inter",
+      "pattern": "font-family[^;]*Inter",
+      "rationale": "Inter is the most common AI-default body font."
+    },
+    {
+      "label": "banned-font:Roboto",
+      "pattern": "font-family[^;]*Roboto",
+      "rationale": "Roboto is a training-data default."
+    },
+    {
+      "label": "default-color:indigo-600",
+      "pattern": "(#4f46e5|indigo-600|bg-indigo-600|text-indigo-600)",
+      "rationale": "Tailwind indigo-600 is the most common AI-default accent."
+    },
+    {
+      "label": "default-color:purple-blue-gradient",
+      "pattern": "gradient[^;]*(purple|indigo)[^;]*(blue|sky)",
+      "rationale": "Purple-to-blue gradient heroes are a slop fingerprint."
+    },
+    {
+      "label": "hardcoded-hex-color",
+      "pattern": "#[0-9a-fA-F]{3,8}",
+      "rationale": "All colors should reference design tokens, not raw hex."
+    },
+    {
+      "label": "hardcoded-font-family",
+      "pattern": "font-family\\s*:",
+      "rationale": "Font declarations should use design tokens."
+    },
+    {
+      "label": "banned-copy:unlock-the-power",
+      "pattern": "[Uu]nlock the power of",
+      "rationale": "Generic AI-generated marketing copy."
+    },
+    {
+      "label": "banned-copy:all-in-one-solution",
+      "pattern": "[Aa]ll-in-one solution",
+      "rationale": "Generic AI-generated marketing copy."
+    },
+    {
+      "label": "banned-naming:utils",
+      "pattern": "(utils\\.(ts|js|tsx|jsx)|/utils/index)",
+      "rationale": "Generic module naming. Use domain-specific names."
+    },
+    {
+      "label": "banned-naming:helpers",
+      "pattern": "(helpers\\.(ts|js|tsx|jsx)|/helpers/index)",
+      "rationale": "Generic module naming. Use domain-specific names."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+---
+description: Rules for writing and editing specifications
+globs: "docs/**/*.md, specs/**/*.md, **/spec.md, **/specification.md"
+alwaysApply: false
+---
+
+# Specification Writing Rules
+
+When editing specification files:
+
+- Every behavior must be precise enough to derive a test case.
+- Include: description, preconditions, postconditions, error conditions.
+- Enumerate edge cases explicitly. Do not leave them implicit.
+- Document failure modes: what happens when things go wrong.
+- Use concrete examples (given X, expect Y).
+- Avoid vague language. "Returns ValidationError with code INVALID_INPUT" not "handles errors gracefully."
+- Cross-reference interface contracts for module dependencies.
+- Flag unresolved ambiguity as Open Questions rather than assuming.
+
+See `agent/SPEC_WRITING_RULES.md` for detailed guidance.

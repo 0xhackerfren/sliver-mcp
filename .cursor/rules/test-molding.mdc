@@ -1,0 +1,23 @@
+---
+description: Rules for writing and editing tests (the mold)
+globs: "tests/**/*, **/test_*.*, **/*_test.*, **/*.test.*, **/*.spec.*"
+alwaysApply: false
+---
+
+# Test Molding Rules
+
+When editing test files:
+
+- Every specification behavior must have at least one test.
+- Every edge case must have a dedicated test.
+- Test names must reference the specification section they verify.
+- Tests must be written against SDK interfaces. Do not reference abstractions outside the constraint surface.
+- Tests must be sharp: incorrect behavior must fail.
+- Tests must not over-specify: test behavior, not implementation details.
+- Contract tests must exist for every inter-module interface.
+- All tests must compile. Before code casting, all tests must fail (red state).
+- Do not write implementation code in test files.
+- If a spec section is untestable, flag it rather than skipping it.
+- If an SDK interface is missing for a behavior you need to test, report the gap.
+
+See `agent/TEST_MOLDING_RULES.md` for detailed guidance.

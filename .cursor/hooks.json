@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "type": "prompt",
+        "prompt": "A source file was just edited. Verify: (1) Does a specification exist for the module this file belongs to? (2) Do SDK interfaces exist that define the constraint surface for this module? (3) Do tests exist that cover the behavior being changed? If any of spec, SDK, or tests is missing, remind the user that Codex Automata requires specifications, SDK constraint surface, and tests before implementation. If a gap exists, recommend creating a gap assessment using templates/gap-assessment-template.md to document it for triage and recovery. (4) If this edit completes or advances meaningful work, remind the user to update context-state.md (from templates/context-state-template.md): Session History, Current Work, and especially the Checkpoint section for the next session. Do not block the edit, but clearly surface any gaps and the recommended next step. Here is the edit context: $ARGUMENTS",
+        "timeout": 15
+      },
+      {
+        "command": ".cursor/hooks/check-hardcoded-values.sh",
+        "matcher": "Write|StrReplace",
+        "timeout": 10
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": ".cursor/hooks/contract-guard.sh",
+        "matcher": "Write|StrReplace",
+        "timeout": 10
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# Engagement data (never commit)
+engagement_state.db
+*.db
+*.db-wal
+*.db-shm
+*.dmp
+*.bin
+*.enc
+payload.*
+
+# Sliver operator configs (secrets)
+*.cfg
+configs/
+
+# Environment and secrets
+.env
+*.pem
+*.key
+*.p12
+*.pfx
+.sliver_state_key
+
+# MCP client config (may contain local paths)
+mcp.json
+
+# Evidence and output
+evidence/
+/tmp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Evasion build artifacts
+evasion/*.exe
+evasion/crypto_keys.nim
+evasion/keys_reference.txt
+
+# pytest cache
+.pytest_cache/

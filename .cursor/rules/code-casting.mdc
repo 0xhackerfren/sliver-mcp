@@ -1,0 +1,28 @@
+---
+description: Rules for writing implementation code (the casting)
+globs: "src/**/*.*, lib/**/*.*, app/**/*.*, pkg/**/*.*"
+alwaysApply: false
+---
+
+# Code Casting Rules
+
+When writing implementation code:
+
+- You are filling a mold within the SDK constraint surface. The tests define the shape. The SDK defines the vocabulary.
+- Read the specification, SDK interfaces, and tests before writing code.
+- Implement SDK interfaces. Do not introduce abstractions outside the SDK.
+- Stay within the assigned module boundary.
+- Use interface contracts as defined. Do not modify them or SDK interfaces.
+- If a test seems wrong, report it. Do not change it.
+- If you need a building block not in the SDK, stop and request SDK extension.
+- Make small, atomic commits toward passing tests.
+- Do not add behavior not required by the specification.
+- Do not introduce undocumented dependencies.
+- Prefer clarity over cleverness.
+- For user-facing code, all visual values (colors, fonts, sizes, spacing, shadows, radii) must reference design tokens from the SDK. Zero hardcoded hex, px, rem, or font-family values.
+- When implementing UI, reference the design identity document for aesthetic direction, permitted patterns, and banned patterns. If no design identity exists for user-facing work, stop and report the gap.
+- Do not use known AI-default patterns when the design identity document specifies alternatives (e.g. Inter/Roboto/Arial as primary typeface, framework-default palettes, purple-blue gradient heroes, generic copy cataloged in the design identity).
+- For user-facing code, ensure all interactive elements are keyboard-accessible, all images have appropriate alt text, all form inputs have labels, and color contrast meets the design identity's WCAG target. Run automated accessibility checks (axe-core or equivalent) alongside linting. Accessibility failures are casting defects.
+- When all assigned tests pass, stop.
+
+See `agent/CODE_CASTING_RULES.md` for detailed guidance.

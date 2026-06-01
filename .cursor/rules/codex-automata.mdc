@@ -1,0 +1,48 @@
+---
+description: Core Codex Automata methodology rules for all agent interactions
+alwaysApply: true
+---
+
+# Codex Automata Core Rules
+
+This project follows the Codex Automata methodology: Research informs decisions. Documentation first, SDK second, Tests third, Code last. Build local-first.
+
+## Constraints
+
+1. Do not write tests or implementation before the specification and SDK constraint surface exist.
+2. Do not expand scope without updating the specification.
+3. Do not silently change interface contracts or SDK interfaces.
+4. Do not introduce abstractions outside the SDK constraint surface. If you need a type, interface, or pattern not in the SDK, stop and request extension.
+5. Do not bypass failing tests. Fix the implementation or flag the test.
+6. Keep context lean. Design tasks, prompts, and specifications to be modular and retrievable in fragments. Do not assume unlimited context windows or frontier-only capabilities.
+7. Prefer small, atomic commits traceable to specification sections.
+8. Surface ambiguity instead of guessing.
+9. Every task must map to a specification section, an SDK interface, and a test case.
+10. When you discover code without a corresponding specification, SDK interface, or tests, halt and report the gap. Do not work around it. Recommend documenting it with `templates/gap-assessment-template.md` for triage and recovery.
+11. For user-facing code, all visual values must trace to design tokens from the SDK. Do not use hardcoded hex, px, rem, or font-family values.
+12. Do not use known AI-default patterns (training-data defaults) when the design identity document specifies alternatives. This applies to code structure (over-abstraction, cargo-cult patterns, speculative generality) as well as human-perceptible surfaces. If a project has user-facing surfaces but no design identity exists, halt and report the gap.
+13. Respect action classification tiers. AUTO actions proceed freely. LOG actions are recorded. APPROVE actions require human approval before execution. When uncertain, treat the action as APPROVE. Modifying SDK interfaces, contracts, specifications, or deleting tests always requires approval.
+
+## Workflow
+
+- When encountering technology decisions or unfamiliar domains, research first. Produce structured findings before specifying.
+- Locate the specification before writing code.
+- Locate the SDK interfaces that define the constraint surface for this task.
+- Locate the test plan before implementing.
+- If spec, SDK, or tests are missing, stop and report before proceeding. Recommend a gap assessment for triage.
+- During recovery tasks (closing gaps in existing code), derive specifications from domain knowledge, SDK extensions from specifications, and tests from specifications against SDK interfaces. Never derive specs, SDK, or tests from the existing code.
+
+## Product Testing
+
+When the project has user-facing features, define product tests alongside module-level molds. Product tests use AI agents operating the application as real users:
+
+- Define user profiles (`templates/user-profile-template.md`) representing the actual user base.
+- Define test objectives as goals, not scripts: "As a first-time user, create an account and reach the dashboard."
+- Set UX budgets (click limits, navigation depth, backtracking limits) grounded in product standards.
+- Product tests run against the assembled application, not individual modules.
+
+## Terminology
+
+Use these terms consistently: research, specification, SDK, constraint surface, building block, local-first, design identity, design token, convergence, divergence gate, slop fingerprint, mold, casting, bounded context, interface contract, quality gate, agent task, assembly pressure, human review, flow, recovery, gap assessment, spec gap, SDK gap, mold gap, coverage erosion, contract gap, product test, user profile, test objective, UX budget, SDK extension.
+
+See `agent/AGENT_RULES.md` for the complete operating manual.

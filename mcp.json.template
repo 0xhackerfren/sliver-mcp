@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "sliver": {
+      "command": "wsl",
+      "args": [
+        "--distribution", "kali-linux",
+        "--", "python3", "${SLIVER_SERVER_PY_PATH:-/mnt/c/path/to/server.py}"
+      ],
+      "env": {
+        "SLIVER_CONFIG": "${SLIVER_CONFIG:-~/.sliver-client/configs/operator.cfg}",
+        "SLIVER_PROJECT_ROOT": "${SLIVER_PROJECT_ROOT}",
+        "SLIVER_EVIDENCE_DIR": "${SLIVER_EVIDENCE_DIR:-/tmp/sliver-evidence}",
+        "SLIVER_OPSEC_MODE": "${SLIVER_OPSEC_MODE:-warn}"
+      }
+    }
+  }
+}
